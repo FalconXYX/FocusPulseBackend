@@ -1,0 +1,20 @@
+{
+  "production": {
+    "sshHost": "<bastion_host>",
+    "sshUsername": "<username>",
+    "sshPrivateKeyPath": "<relative path to private_key.pem>",
+    "dbHost": "<rds_endpoint>",
+    "dbUsername": "<database_username>",
+    "dbPassword": "<database_password>",
+    "dbName": "<database_name>"
+  },
+  "staging": {
+    "sshHost": "<bastion_host>",
+    "sshUsername": "<username>",
+    "sshPrivateKeyPath": "<relative path to private_key.pem>",
+    "dbHost": "<rds_endpoint>",
+    "dbUsername": "<database_username>",
+    "dbPassword": "<database_password>",
+    "dbName": "<database_name>"
+  }
+}

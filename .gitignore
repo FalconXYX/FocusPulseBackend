@@ -1,0 +1,5 @@
+node_modules
+.webpack
+.serverless
+build
+database/ssh-tunnel-config.json

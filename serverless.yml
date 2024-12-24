@@ -1,0 +1,89 @@
+frameworkVersion: '3'
+
+service: starter
+
+# NOTE: plugin load order matters
+plugins:
+  - serverless-bundle
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  stage: ${opt:stage, 'development'}
+  #  vpc: # automatically adds the AWSLambdaVPCAccessExecutionRole policy to the iamRole
+  #    securityGroupIds: ${file(env.yml):${self:provider.stage}.vpc.securityGroupIds}
+  #    subnetIds: ${file(env.yml):${self:provider.stage}.vpc.subnetIds}
+  environment:
+    NODE_ENV: ${self:provider.stage}
+  stackTags:
+    serverless: 'true'
+    environment: ${self:provider.stage}
+  tags:
+    serverless: 'true'
+    environment: ${self:provider.stage}
+
+functions:
+  library-create:
+    handler: src/functions/library/create.handler
+    layers:
+      - ${file(env.yml):${self:provider.stage}.layers.NodeModulesLayer}
+    events:
+      - http:
+          path: libraries
+          method: post
+    environment:
+      TEST_ENVIRONMENT: ${file(env.yml):${self:provider.stage}.environment.TEST_ENVIRONMENT}
+
+  library-get:
+    handler: src/functions/library/get.handler
+    layers:
+      - ${file(env.yml):${self:provider.stage}.layers.NodeModulesLayer}
+    events:
+      - http:
+          path: libraries/{id}
+          method: get
+    environment:
+      TEST_ENVIRONMENT: ${file(env.yml):${self:provider.stage}.environment.TEST_ENVIRONMENT}
+
+  ping:
+    handler: src/functions/ping.handler
+    layers:
+      - ${file(env.yml):${self:provider.stage}.layers.NodeModulesLayer}
+    events:
+      - http:
+          path: ping
+          method: get
+    environment:
+      TEST_ENVIRONMENT: ${file(env.yml):${self:provider.stage}.environment.TEST_ENVIRONMENT}
+
+  user:
+    handler: src/functions/user.handler
+    layers:
+      - ${file(env.yml):${self:provider.stage}.layers.NodeModulesLayer}
+    events:
+      - http:
+          path: user
+          method: post
+    environment:
+      TEST_ENVIRONMENT: ${file(env.yml):${self:provider.stage}.environment.TEST_ENVIRONMENT}
+
+custom:
+  bundle:
+    sourcemaps: true # Enable source maps
+    caching: true # Enable Webpack caching
+    concurrency: 5 # Set desired concurrency, defaults to the number of available cores
+    stats: false # Don't print out any Webpack output
+    linting: true # Enable linting as a part of the build process
+    generateStatsFiles: false # Creates stats files that could be used for bundle analyzing, more below
+    esbuild: false # Use esbuild-loader instead of babel or ts for faster builds
+    disableForkTsChecker: false # Disable the ForkTsChecker plugin, more below
+    tsConfig: 'tsconfig.serverless.json' # Path to your 'tsconfig.json', if it's not in the root
+    packager: npm # Specify a packager, 'npm' or 'yarn'. Defaults to 'npm'.
+    forceExclude: # Because it'll be provided through a Lambda Layer
+      - aws-sdk
+      - knex
+      - objection
+      - pg
+      - uuid
