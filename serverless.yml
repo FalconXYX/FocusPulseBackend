@@ -1,15 +1,14 @@
-frameworkVersion: '3'
+frameworkVersion: '4'
 
 service: starter
 
 # NOTE: plugin load order matters
 plugins:
-  - serverless-bundle
   - serverless-offline
 
 provider:
   name: aws
-  runtime: nodejs18.x
+  runtime: nodejs20.x
   region: us-east-1
   stage: ${opt:stage, 'development'}
   #  vpc: # automatically adds the AWSLambdaVPCAccessExecutionRole policy to the iamRole
