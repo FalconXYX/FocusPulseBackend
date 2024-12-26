@@ -33,6 +33,10 @@ npm start
 
 > Note: when running Serverless locally, due to the way that Lambda layers are connected, it will output a `Warning: Invalid configuration encountered` warning to the console. This can safely be ignored, as it is only an artifact that exists locally.
 
+```sh
+docker run --name some-postgres -e POSTGRES_HOST_AUTH_METHOD=trust -p 5432:5432 -d postgres
+```
+
 ## Migrations
 
 ```sh

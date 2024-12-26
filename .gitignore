@@ -3,3 +3,4 @@ node_modules
 .serverless
 build
 database/ssh-tunnel-config.json
+.randomTests
