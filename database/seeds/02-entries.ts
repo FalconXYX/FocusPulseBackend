@@ -3,7 +3,7 @@ import { NIL as NIL_UUID } from 'uuid';
 
 export async function seed(knex: Knex): Promise<void> {
   // Deletes ALL existing entries
-  await knex('libraries').del();
+  await knex('entries').del();
 
   // Inserts seed entries
   await knex('entries').insert([

@@ -1,13 +1,21 @@
 {
-    "type": "object",
-    "required": [
-        "email"
-    ],
-    "properties": {
-        "email": {
-            "type": "string",
-            "minLength": 5,
-            "maxLength": 127
-        }
+  "type": "object",
+  "required": ["email", "username", "user_token"],
+  "properties": {
+    "email": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 127
+    },
+    "username": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 127
+    },
+    "user_token": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 127
     }
+  }
 }

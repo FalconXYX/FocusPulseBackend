@@ -10,6 +10,9 @@ export class User extends mixin(BaseModel) {
   public static override jsonSchema = schema;
 
   // Model fields
-  public email?: string;
-  public isAdmin!: boolean;
+  public email!: string;
+  public user_token!: string;
+  public username!: string;
+  public streaks_started!: number;
+  public streaks_completed!: number;
 }

@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "required": ["type", "activity_time"],
+  "properties": {
+    "activity_time": {
+      "type": "number",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "type": {
+      "type": "string",
+      "enum": ["streak", "break", "idle"]
+    }
+  }
+}

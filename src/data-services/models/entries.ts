@@ -1,10 +1,10 @@
 import { mixin, snakeCaseMappers, Model } from 'objection';
 
-import schema from './schemas/library.json';
-import { Book } from './book';
+import schema from './schemas/entries.json';
+import { User } from './user';
 import { BaseModel } from './base-model';
 
-export class Library extends mixin(BaseModel) {
+export class Entries extends mixin(BaseModel) {
   // Model metadata
   public static override tableName = 'libraries';
   public static override columnNameMappers = snakeCaseMappers();
@@ -12,17 +12,17 @@ export class Library extends mixin(BaseModel) {
 
   // Model relationships
   public static override relationMappings = {
-    books: {
-      relation: Model.HasManyRelation,
-      modelClass: Book,
+    user_id: {
+      relation: Model.BelongsToOneRelation,
+      modelClass: User,
       join: {
-        from: 'libraries.id',
-        to: 'books.library_id',
+        from: 'entries.user_id',
+        to: 'users.id',
       },
     },
   };
 
   // Model fields
-  public name!: string;
-  public description?: string;
+  public type!: string;
+  public activity_time!: number;
 }

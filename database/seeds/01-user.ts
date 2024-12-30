@@ -3,14 +3,14 @@ import { NIL as NIL_UUID } from 'uuid';
 
 export async function seed(knex: Knex): Promise<void> {
   // Deletes ALL existing entries
-  await knex('user').del();
+  await knex('users').del();
 
   // Inserts seed entries
-  await knex('user').insert([
+  await knex('users').insert([
     {
       id: NIL_UUID,
       created_at: new Date(),
-      last_login: new Date(),
+      updated_at: new Date(),
       username: 'ParthJ',
       email: 'parthkj6@gmail.com',
       user_token: '109123476617581578598',

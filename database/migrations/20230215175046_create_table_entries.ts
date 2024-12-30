@@ -8,9 +8,8 @@ export async function up(knex: Knex): Promise<void> {
     table.boolean('is_deleted').notNullable().defaultTo(false);
     table.dateTime('deleted_at').nullable();
 
-    table.integer('activty_time').notNullable();
+    table.integer('activity_time').notNullable();
     table.string('type').notNullable();
-
     // Foreign key column for user.
     table.uuid('user_id').references('id').inTable('users').onDelete('SET NULL').index();
   });
