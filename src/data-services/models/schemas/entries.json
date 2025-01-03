@@ -1,15 +1,9 @@
 {
   "type": "object",
-  "required": ["type", "activity_time"],
   "properties": {
-    "activity_time": {
-      "type": "number",
-      "minLength": 1,
-      "maxLength": 100
-    },
-    "type": {
-      "type": "string",
-      "enum": ["streak", "break", "idle"]
-    }
-  }
+    "id": { "type": "string" },
+    "type": { "type": "string" },
+    "activity_time": { "type": "number" }
+  },
+  "required": ["type", "activity_time"]
 }

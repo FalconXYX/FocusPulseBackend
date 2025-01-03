@@ -24,24 +24,24 @@ provider:
     environment: ${self:provider.stage}
 
 functions:
-  library-create:
-    handler: src/functions/library/create.handler
+  entry-create:
+    handler: src/functions/entries/create.handler
     layers:
       - ${file(env.yml):${self:provider.stage}.layers.NodeModulesLayer}
     events:
       - http:
-          path: libraries
+          path: entries
           method: post
     environment:
       TEST_ENVIRONMENT: ${file(env.yml):${self:provider.stage}.environment.TEST_ENVIRONMENT}
 
-  library-get:
-    handler: src/functions/library/get.handler
+  entry-get:
+    handler: src/functions/entries/get.handler
     layers:
       - ${file(env.yml):${self:provider.stage}.layers.NodeModulesLayer}
     events:
       - http:
-          path: libraries/{id}
+          path: entries/{id}
           method: get
     environment:
       TEST_ENVIRONMENT: ${file(env.yml):${self:provider.stage}.environment.TEST_ENVIRONMENT}

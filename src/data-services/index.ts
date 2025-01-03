@@ -1,5 +1,3 @@
-import { AuthorDataService } from './services/author-data-service';
-import { BookDataService } from './services/book-data-service';
 import { EntriesDataService } from './services/entries-data-service';
 import { UserDataService } from './services/user-data-service';
 
@@ -10,8 +8,6 @@ import { Database } from '../lib/database';
 new Database();
 
 export const ds = {
-  author: new AuthorDataService(),
-  book: new BookDataService(),
-  library: new EntriesDataService(),
+  entry: new EntriesDataService(),
   user: new UserDataService(),
 };

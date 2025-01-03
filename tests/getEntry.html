@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Lambda API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        label,
+        input {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Test Lambda Function</h1>
+    <form id="apiTestForm">
+        <label for="id">Enter UUID (ID):</label>
+        <input type="text" id="id" name="id" placeholder="Enter UUID here" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="response" class="response"></div>
+
+    <script>
+        document.getElementById('apiTestForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const uuid = document.getElementById('id').value;
+            const responseDiv = document.getElementById('response');
+            responseDiv.innerHTML = '';
+
+            try {
+                const response = await fetch(`http://localhost:3000/development/entries/${uuid}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    const errorMessage = await response.text();
+                    throw new Error(errorMessage || 'Error fetching the entry');
+                }
+
+                const data = await response.json();
+                responseDiv.innerHTML = `<pre class="success">${JSON.stringify(data, null, 2)}</pre>`;
+            } catch (error) {
+                responseDiv.innerHTML = `<p class="error">${error.message}</p>`;
+            }
+        });
+    </script>
+</body>
+
+</html>

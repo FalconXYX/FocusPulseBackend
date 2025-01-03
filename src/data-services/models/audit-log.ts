@@ -8,9 +8,7 @@ export enum AUDIT_CONTEXT_TYPE {
 }
 
 export enum AUDIT_EVENTS {
-  AUTHOR_ADDED = 'author_added',
-  BOOK_ADDED = 'book_added',
-  LIBRARY_ADDED = 'library_added',
+  ENTRY_ADDED = 'library_added',
   USER_ADDED = 'user_added',
 }
 
