@@ -23,7 +23,7 @@ interface EntryBody {
 
 const baseHandler = async (event: APIGatewayProxyEventMiddyNormalised<EntryBody>, _context: Context): Promise<APIGatewayProxyResult> => {
   let { securityCode, user_id, type, activity_time } = event.body;
-  //user_id = NIL_UUID;
+  user_id = '00000000-0000-0000-0000-000000000000 ';
   // do security code validation here
 
   const data = { type, activity_time, user_id };

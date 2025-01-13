@@ -17,12 +17,12 @@ const baseHandler = async (event: APIGatewayProxyEventMiddyNormalised, _context:
     throw new createError.BadRequest('Invalid ID');
   }
 
-  const entry = await ds.entry.get({ id });
+  const entry = await ds.entry.get({ id }).withGraphFetched('books');
   if (entry) {
     return okReturn(JSON.stringify(entry));
   }
 
-  throw new createError.NotFound('Entry not found');
+  throw new createError.NotFound('entry not found');
 };
 
 export const handler = middy(baseHandler).use(jsonBodyParser()).use(httpErrorHandler());

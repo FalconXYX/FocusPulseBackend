@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Lambda Function</title>
+</head>
+
+<body>
+
+    <h1>Test Lambda Function</h1>
+
+    <form id="entryForm">
+        <label for="securityCode">Security Code:</label>
+        <input type="text" id="securityCode" name="securityCode" required>
+        <br><br>
+
+        <label for="userId">User ID:</label>
+        <input type="text" id="userId" name="userId" required>
+        <br><br>
+
+        <label for="timeRange">Time Range:</label>
+        <select id="timeRange" name="timeRange" required>
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+            <option value="month">Month</option>
+            <option value="6month">6 Months</option>
+            <option value="year">Year</option>
+            <option value="all">All Time</option>
+        </select>
+        <br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('entryForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            // Get the form data
+            const securityCode = document.getElementById('securityCode').value;
+            const user_id = document.getElementById('userId').value;
+            const timeRange = document.getElementById('timeRange').value;
+
+            const requestData = {
+                securityCode,
+                user_id,
+                timeRange
+            };
+
+            try {
+                const response = await fetch('http://localhost:3000/development/entries/bar', {  // Replace with your actual Lambda URL
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestData)
+                });
+
+                const result = await response.json();
+
+                // Display result
+                document.getElementById('result').textContent = JSON.stringify(result, null, 2);
+            } catch (error) {
+                document.getElementById('result').textContent = 'Error: ' + error;
+            }
+        });
+    </script>
+
+</body>
+
+</html>

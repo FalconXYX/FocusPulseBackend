@@ -35,17 +35,36 @@ functions:
     environment:
       TEST_ENVIRONMENT: ${file(env.yml):${self:provider.stage}.environment.TEST_ENVIRONMENT}
 
-  entry-get:
-    handler: src/functions/entries/get.handler
+  entry-get-ratio:
+    handler: src/functions/entries/getDataTimeRatio.handler
     layers:
       - ${file(env.yml):${self:provider.stage}.layers.NodeModulesLayer}
     events:
       - http:
-          path: entries/{id}
-          method: get
+          path: entries/ratio
+          method: post
     environment:
       TEST_ENVIRONMENT: ${file(env.yml):${self:provider.stage}.environment.TEST_ENVIRONMENT}
-
+  entry-get-trend:
+    handler: src/functions/entries/getDataTimeTrend.handler
+    layers:
+      - ${file(env.yml):${self:provider.stage}.layers.NodeModulesLayer}
+    events:
+      - http:
+          path: entries/trend
+          method: post
+    environment:
+      TEST_ENVIRONMENT: ${file(env.yml):${self:provider.stage}.environment.TEST_ENVIRONMENT}
+  entry-get-bar:
+    handler: src/functions/entries/getDataTimeBar.handler
+    layers:
+      - ${file(env.yml):${self:provider.stage}.layers.NodeModulesLayer}
+    events:
+      - http:
+          path: entries/bar
+          method: post
+    environment:
+      TEST_ENVIRONMENT: ${file(env.yml):${self:provider.stage}.environment.TEST_ENVIRONMENT}
   ping:
     handler: src/functions/ping.handler
     layers:

@@ -5,5 +5,5 @@
     "type": { "type": "string" },
     "activity_time": { "type": "number" }
   },
-  "required": []
+  "required": ["type", "activity_time"]
 }
