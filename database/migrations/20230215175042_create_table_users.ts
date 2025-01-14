@@ -10,8 +10,8 @@ export async function up(knex: Knex): Promise<void> {
     table.string('username').notNullable();
     table.string('email').unique();
     table.text('user_token').notNullable();
-    table.integer('streaks_started').notNullable();
-    table.integer('streaks_completed').notNullable();
+    table.integer('streaks_started').notNullable().defaultTo(0);
+    table.integer('streaks_completed').notNullable().defaultTo(0);
     table.boolean('is_admin').notNullable().defaultTo(false);
   });
 }

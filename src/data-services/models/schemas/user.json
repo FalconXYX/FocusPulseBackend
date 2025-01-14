@@ -16,6 +16,12 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 127
+    },
+    "streaks_started": {
+      "type": "string"
+    },
+    "streaks_completed": {
+      "type": "string"
     }
   }
 }

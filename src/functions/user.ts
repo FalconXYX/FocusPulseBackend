@@ -14,18 +14,20 @@ import { AUDIT_EVENTS } from 'src/data-services/models/audit-log';
 
 interface UserBody {
   email: string;
+  user_token: string;
 }
 
 // TODO(ikeviny): APIGatewayProxyWithCognitoAuthorizerEvent
 const baseHandler = async (event: APIGatewayProxyEventMiddyNormalised<UserBody>, _context: Context): Promise<APIGatewayProxyResult> => {
-  const { email } = event.body;
+  const { email, user_token } = event.body;
+  // do security code validation here
 
   const user = await ds.user.get({ email });
   if (user) {
     return okReturn(JSON.stringify(user));
   }
 
-  const create = await ds.user.create({ email });
+  const create = await ds.user.create({ email, user_token });
   await logUserEvent(AUDIT_EVENTS.USER_ADDED);
   console.log('Created new user');
 
